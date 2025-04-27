@@ -1,4 +1,9 @@
-apiVersion: v1
 kind: Namespace
+apiVersion: v1
 metadata:
-  name: chat-app
+  name: backend-deployment
+  namespace: chat-app
+
+spec:
+  replicas: 1
+  selector:

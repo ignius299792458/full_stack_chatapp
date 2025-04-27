@@ -1,29 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: chatapp-frontend-deployment
   namespace: chat-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: chatapp-frontend
   template:
     metadata:
-      name: frontend-pod
+      name: chatapp-frontend-pod
       namespace: chat-app
-      labels: 
-        app: frontend
+      labels:
+        app: chatapp-frontend
     spec:
       containers:
-      - name: chatapp-frontend
-        image: trainwithshubham/chatapp-frontend
-        ports:
-        - containerPort: 80
-        env:
-        - name: NODE_ENV
-          value: production
-          
-
-
-
+        - name: chatapp-frontend-cont
+          image: gendocker314/chatapp-client:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: NODE_ENV
+              value: production
+          ports:
+            - containerPort: 80
